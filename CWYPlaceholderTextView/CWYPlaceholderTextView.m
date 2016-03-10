@@ -48,6 +48,7 @@
         self.alwaysBounceVertical = YES;
         self.font = FontSize15;
         self.placeholderColor = GrayColor;
+        self.placeholder = @"type your placeholder text here please";
         [NoteCenter addObserver:self selector:@selector(textDidChanged) name:UITextViewTextDidChangeNotification object:nil];
     }
     return self;

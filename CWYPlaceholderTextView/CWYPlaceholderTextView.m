@@ -36,10 +36,10 @@
     }
     return _placeholderLabel;
 }
--(void)updatePlaceholderSize{
-    CGSize maxSize = CGSizeMake(ScreenW - 2 * self.placeholderLabel.x, MAXFLOAT);
-    //Calculate text size
-    self.placeholderLabel.size = [self.placeholder boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : self.font} context:nil].size;
+-(void)layoutSubviews{
+
+    self.placeholderLabel.width = self.width - 2 * self.placeholderLabel.x;
+    [self.placeholderLabel sizeToFit];
 }
 
 -(instancetype)initWithFrame:(CGRect)frame{
@@ -61,7 +61,7 @@
 -(void)setFont:(UIFont *)font{
     [super setFont:font];
     self.placeholderLabel.font = font;
-    [self updatePlaceholderSize];
+    [self setNeedsLayout];
 }
 -(void)setText:(NSString *)text{
     [super setText:text];
@@ -76,12 +76,13 @@
 -(void)setPlaceholderColor:(UIColor *)placeholderColor{
     _placeholderColor = placeholderColor;
     self.placeholderLabel.textColor = _placeholderColor;
+    [self setNeedsDisplay];
 }
 
 -(void)setPlaceholder:(NSString *)placeholder{
     _placeholder = placeholder;
     self.placeholderLabel.text = _placeholder;
-    [self updatePlaceholderSize];
+    [self setNeedsLayout];
 }
 
 -(void)dealloc{

@@ -67,6 +67,9 @@
 -(void)setText:(NSString *)text{
     [super setText:text];
     [self textDidChanged];
+    if ([self.delegate respondsToSelector:@selector(textViewDidChange:)]) {
+        [self.delegate textViewDidChange:self];
+    }
     
 }
 -(void)setAttributedText:(NSAttributedString *)attributedText{
